@@ -1,6 +1,4 @@
-/**
- * Card Generator - Dynamically generates member cards from config.json
- */
+
 
 class CardGenerator {
     constructor() {
@@ -8,10 +6,9 @@ class CardGenerator {
     }
 
     async init() {
-        // Wait for config to load
+
         await window.configLoader.load();
-        
-        // Generate cards once DOM is ready
+
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => this.generateAllCards());
         } else {
@@ -21,8 +18,7 @@ class CardGenerator {
 
     generateAllCards() {
         const config = window.configLoader;
-        
-        // Generate founder cards
+
         const foundersContainer = document.querySelector('#founders .container');
         if (foundersContainer && config.profiles.founders) {
             foundersContainer.innerHTML = '';
@@ -31,7 +27,6 @@ class CardGenerator {
             });
         }
 
-        // Generate member cards
         const membersContainer = document.querySelector('#membersContainer');
         if (membersContainer && config.profiles.members) {
             membersContainer.innerHTML = '';
@@ -40,7 +35,6 @@ class CardGenerator {
             });
         }
 
-        // Dispatch event when cards are generated
         document.dispatchEvent(new CustomEvent('cardsGenerated'));
     }
 
@@ -70,5 +64,4 @@ class CardGenerator {
     }
 }
 
-// Initialize card generator
 window.cardGenerator = new CardGenerator();

@@ -15,19 +15,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="Really Silly Club">
     <meta property="og:description" content="really silly club is a group of friends that enjoy rhythm games, mainly rhythia.">
-    <meta property="og:image" content="assets/caticon.png">
+    <meta property="og:image" content="assets\caticon.png">
     <meta property="og:url" content="https://reallysilly.lol/">
     <meta property="theme-color" content="#9e9e98">
 </head>
 <body>
-    <!-- Animated gradient background -->
+    
     <div class="animated-background"></div>
     <div class="brail-background"></div>
 
-    <!-- Audio Visualizer -->
+    
     <canvas id="audioVisualizer" class="audio-visualizer"></canvas>
 
-    <!-- Card Overlay for expanded cards -->
+    
     <div id="cardOverlay" class="card-overlay"></div>
 
     <header>
@@ -42,6 +42,9 @@
                 <a href="#members" onclick="showSection('members'); return false;" class="nav-link">
                     <span>members</span>
                 </a>
+                <a href="#shop" onclick="showSection('shop'); return false;" class="nav-link">
+                    <span>shop</span>
+                </a>
                 <a href="https://discord.gg/442jszx9ae" target="_blank" rel="noopener noreferrer" class="nav-link">
                     <span>discord</span>
                 </a>
@@ -50,7 +53,7 @@
     </header>
 
     <main>
-        <!-- About Section -->
+        
         <div id="about" class="content-section active">
             <div class="hero-content">
                 <img src="assets/loading.gif" alt="ppcat" class="main-icon floating">
@@ -76,36 +79,43 @@
             </div>
         </div>
 
-        <!-- Founders Section -->
+        
         <div id="founders" class="content-section">
             <h2 class="section-title">
                 <span class="title-text">Founders</span>
                 <span class="title-underline"></span>
             </h2>
             <div class="container">
-                <!-- Cards generated dynamically from config.json -->
+                
             </div>
         </div>
 
-        <!-- Members Section -->
+        
         <div id="members" class="content-section">
             <h2 class="section-title">
                 <span class="title-text">Members</span>
                 <span class="title-underline"></span>
             </h2>
 
-            <!-- Search/Filter -->
+            
             <div class="filter-container">
                 <input type="text" id="memberSearch" class="search-input" placeholder="🔍 Search members...">
             </div>
 
             <div class="container" id="membersContainer">
-                <!-- Cards generated dynamically from config.json -->
+                
+            </div>
+        </div>
+
+        
+        <div id="shop" class="content-section">
+            <div class="coming-soon">
+                <h2>COMING SOON</h2>
             </div>
         </div>
     </main>
 
-    <!-- Audio Controls -->
+    
     <div class="audio-controls">
         <button class="audio-btn mute-button" id="muteBtn" aria-label="Mute/Unmute">
             <svg class="audio-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -123,14 +133,14 @@
         </div>
     </div>
 
-    <!-- Back to Top Button -->
+    
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M12 19V5M5 12l7-7 7 7"/>
         </svg>
     </button>
 
-    <!-- Footer -->
+    
     <footer>
         <p>© RSC 2023</p>
         <a href="https://cakecable.github.io/cake" target="_blank" rel="noopener noreferrer" class="credit-link" title="Made with ♥ by cake">
@@ -138,7 +148,7 @@
         </a>
     </footer>
 
-    <!-- Scripts -->
+    
     <script src="js/oneko.js" defer></script>
 </body>
 </html>

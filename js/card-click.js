@@ -7,7 +7,6 @@ class CardClickHandler {
         this.activityIntervalId = null;
         this.init();
 
-        // Expose for other scripts (e.g. random member button)
         window.cardClickHandler = this;
     }
 
@@ -16,7 +15,7 @@ class CardClickHandler {
         return views[memberName] || 0;
     }
 
-    /** Count one view per member per browser session (no spam). */
+    
     incrementViews(memberName) {
         const viewed = JSON.parse(sessionStorage.getItem(this.sessionViewedKey) || '{}');
         if (viewed[memberName]) {
@@ -34,10 +33,8 @@ class CardClickHandler {
     init() {
         this.createOverlay();
 
-        // Listen for cards being generated dynamically
         document.addEventListener('cardsGenerated', () => this.attachCardListeners());
-        
-        // Also attach to any existing cards
+
         this.attachCardListeners();
 
         this.checkUrlForMember();
@@ -68,7 +65,7 @@ class CardClickHandler {
     attachCardListeners() {
         const cards = document.querySelectorAll('.card');
         cards.forEach(card => {
-            // Avoid adding duplicate listeners
+
             if (!card.hasAttribute('data-click-handler')) {
                 card.setAttribute('data-click-handler', 'true');
                 card.addEventListener('click', (e) => {
@@ -83,25 +80,22 @@ class CardClickHandler {
         const hash = window.location.hash;
         if (hash.startsWith('#member=')) {
             const memberName = hash.replace('#member=', '');
-            
-            // Wait for cards to be generated if not yet available
+
             const tryOpen = () => {
                 const card = document.querySelector(`.card[data-member="${memberName}"]`);
                 if (card && !this.currentExpandedCard) {
                     this.expandCard(card);
                 }
             };
-            
-            // Try immediately
+
             tryOpen();
-            
-            // Also listen for cards being generated
+
             document.addEventListener('cardsGenerated', tryOpen, { once: true });
         }
     }
 
     createOverlay() {
-        // Use existing overlay from HTML instead of creating new one
+
         this.overlay = document.getElementById('cardOverlay') || document.querySelector('.card-overlay');
         
         if (!this.overlay) {
@@ -194,7 +188,6 @@ class CardClickHandler {
         this.overlay.classList.add('active');
         this.currentExpandedCard = expandedCard;
 
-        // Start live timer updates for activity elapsed time
         this.startActivityTimer(memberName);
 
         if (memberName) {
@@ -240,7 +233,7 @@ class CardClickHandler {
     }
 
     getBadgeIcons(memberName) {
-        // Use config loader if available
+
         if (window.configLoader && window.configLoader.loaded) {
             const badges = window.configLoader.getMemberBadges(memberName);
             const badgesPath = window.configLoader.getBadgesPath();
@@ -270,8 +263,7 @@ class CardClickHandler {
                     let activityDetails = activity.details || '';
                     let activityState = activity.state || '';
                     let elapsed = '';
-                    
-                    // Get activity icon
+
                     if (activity.assets && activity.assets.large_image) {
                         const imageId = activity.assets.large_image;
                         if (imageId.startsWith('mp:')) {
@@ -284,8 +276,7 @@ class CardClickHandler {
                     if (!activityIcon) {
                         activityIcon = '<span style="font-size: 24px;">🎮</span>';
                     }
-                    
-                    // Calculate elapsed time (Discord-style: HH:MM:SS or MM:SS)
+
                     if (activity.timestamps && activity.timestamps.start) {
                         const start = activity.timestamps.start;
                         const now = Date.now();
@@ -301,8 +292,7 @@ class CardClickHandler {
                             elapsed = `${mins.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} elapsed`;
                         }
                     }
-                    
-                    // Build description
+
                     let description = '';
                     if (activityDetails && activityState) {
                         description = `${activityDetails}<br>${activityState}`;
@@ -311,8 +301,7 @@ class CardClickHandler {
                     } else if (activityState) {
                         description = activityState;
                     }
-                    
-                    // Build HTML
+
                     activityHtml = `
                         <div class="activity-icon">${activityIcon}</div>
                         <div class="activity-details">
@@ -385,7 +374,6 @@ class CardClickHandler {
             }
         };
 
-        // Initial update and then every second
         updateElapsed();
         this.activityIntervalId = setInterval(updateElapsed, 1000);
     }

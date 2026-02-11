@@ -90,7 +90,6 @@
     function idle() {
         idleTime += 1;
 
-        // every ~ 20 seconds
         if (
             idleTime > 10 &&
             Math.floor(Math.random() * 200) == 0 &&
@@ -141,7 +140,7 @@
 
         if (idleTime > 1) {
             setSprite("alert", 0);
-            // count down after being alerted before moving
+
             idleTime = Math.min(idleTime, 7);
             idleTime -= 1;
             return;

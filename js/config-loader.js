@@ -1,7 +1,4 @@
-/**
- * Config Loader - Loads and manages config.json data
- * Makes profile data available to all other scripts
- */
+
 
 class ConfigLoader {
     constructor() {
@@ -41,19 +38,16 @@ class ConfigLoader {
         return this.loadPromise;
     }
 
-    // Get all profiles as flat array
     getAllProfiles() {
         if (!this.profiles) return [];
         return [...(this.profiles.founders || []), ...(this.profiles.members || [])];
     }
 
-    // Get profile by member name
     getProfile(memberName) {
         const all = this.getAllProfiles();
         return all.find(p => p.name.toLowerCase() === memberName.toLowerCase());
     }
 
-    // Get Discord ID for a member
     getDiscordId(memberName) {
         const profile = this.getProfile(memberName);
         if (profile && profile.socials && profile.socials.discord) {
@@ -62,7 +56,6 @@ class ConfigLoader {
         return null;
     }
 
-    // Get all Discord IDs as object { memberName: discordId }
     getAllDiscordIds() {
         const ids = {};
         this.getAllProfiles().forEach(profile => {
@@ -73,13 +66,11 @@ class ConfigLoader {
         return ids;
     }
 
-    // Get badge info
     getBadgeInfo(badgeName) {
         if (!this.badges) return null;
         return this.badges[badgeName] || null;
     }
 
-    // Get badges for a member
     getMemberBadges(memberName) {
         const profile = this.getProfile(memberName);
         if (!profile || !profile.badges) return [];
@@ -97,17 +88,14 @@ class ConfigLoader {
         }).filter(b => b !== null);
     }
 
-    // Get platform info
     getPlatformInfo(platformName) {
         if (!this.platforms) return null;
         return this.platforms[platformName] || null;
     }
 
-    // Get badges path
     getBadgesPath() {
         return this.config?.config?.badgesPath || 'assets/badges/';
     }
 }
 
-// Create global instance
 window.configLoader = new ConfigLoader();

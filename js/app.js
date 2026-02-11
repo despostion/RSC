@@ -1,6 +1,6 @@
-// ==========================================
-// RSC Website V2 - Main Application
-// ==========================================
+
+
+
 
 class RSCApp {
     constructor() {
@@ -25,13 +25,11 @@ class RSCApp {
 
         document.addEventListener('click', () => this.initAudio(), { once: true });
 
-        // Cards are generated dynamically. Re-run any card-dependent setup after generation.
         document.addEventListener('cardsGenerated', () => {
             this.setupAnimations();
         });
     }
 
-    /** Fetch Discord server member count (no bot) and site visits, update about stats. */
     async setupLiveStats() {
         const membersStat = this.getStatCardByLabel('members');
         const visitsStat = this.getStatCardByLabel('site visits');
@@ -56,7 +54,7 @@ class RSCApp {
                 }
             }
         } catch (_) {
-            // Keep placeholder values on error
+
         }
     }
 
@@ -71,7 +69,7 @@ class RSCApp {
         return null;
     }
 
-    /** Discord invite API with_counts (no bot). Uses CORS proxy for browser. */
+    
     async fetchDiscordMemberCount() {
         let inviteUrl = 'https://discord.com/api/v10/invites/442jszx9ae?with_counts=true';
         if (window.configLoader && window.configLoader.loaded) {
@@ -88,21 +86,25 @@ class RSCApp {
         return data.approximate_member_count ?? null;
     }
 
-    /** CountAPI: hit = increment and return new value (global site visits). */
+    
     async fetchSiteVisitCount() {
-        const namespace = 'rsc-bio';
-        const key = 'visits';
-        const hitUrl = `https://api.countapi.xyz/hit/${namespace}/${key}`;
-        const res = await fetch(hitUrl);
-        if (!res.ok) return null;
-        const data = await res.json();
-        return typeof data.value === 'number' ? data.value : null;
+        const storageKey = 'rsc-site-visits';
+        const sessionKey = 'rsc-visit-counted';
+
+        let visits = parseInt(localStorage.getItem(storageKey)) || 0;
+
+        if (!sessionStorage.getItem(sessionKey)) {
+            visits++;
+            localStorage.setItem(storageKey, String(visits));
+            sessionStorage.setItem(sessionKey, 'true');
+        }
+
+        return visits;
     }
 
     setupTheme() {
         const themeToggle = document.getElementById('themeToggle');
-        
-        // Skip if theme toggle doesn't exist
+
         if (!themeToggle) return;
         
         const sunIcon = themeToggle.querySelector('.sun-icon');
@@ -191,7 +193,6 @@ class RSCApp {
         const volumeSlider = document.getElementById('volumeSlider');
         const volumeValue = document.querySelector('.volume-value');
 
-        // Use profileMusicPlayer for audio management
         muteBtn.addEventListener('click', () => {
             this.isMuted = !this.isMuted;
 
@@ -213,7 +214,6 @@ class RSCApp {
             this.currentVolume = parseInt(e.target.value);
             volumeValue.textContent = `${this.currentVolume}%`;
 
-            // Update volume for profileMusicPlayer
             if (window.profileMusicPlayer) {
                 const volume = this.currentVolume / 100;
                 if (window.profileMusicPlayer.anthem) {
@@ -222,7 +222,7 @@ class RSCApp {
                 if (window.profileMusicPlayer.currentAudio) {
                     window.profileMusicPlayer.currentAudio.volume = volume;
                 }
-                // Update all cached audio
+
                 window.profileMusicPlayer.audioCache.forEach(audio => {
                     audio.volume = volume;
                 });
@@ -232,7 +232,7 @@ class RSCApp {
 
     initAudio() {
         if (!this.isAudioInitialized && !this.isMuted) {
-            // Use profileMusicPlayer to start anthem
+
             if (window.profileMusicPlayer) {
                 window.profileMusicPlayer.initAnthem();
             }
@@ -353,8 +353,7 @@ class RSCApp {
         });
     }
 
-    // Select a random member and open their profile modal.
-    // Uses the CardClickHandler if available (preferred).
+
     selectRandomMember() {
         const cards = Array.from(document.querySelectorAll('#membersContainer .card[data-member]'));
         if (cards.length === 0) return;
@@ -366,7 +365,6 @@ class RSCApp {
             return;
         }
 
-        // Fallback: trigger the click handler on the card.
         card.click();
     }
 }

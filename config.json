@@ -6,30 +6,38 @@
                 "displayName": "cake",
                 "bio": "took 3 years but we're making progress",
                 "badges": ["owner", "developer", "dedicatedrsc", "member"],
-                "icon": "assets/members/cakepfp.png",
+                "icon": "assets/members/cakepfp.jpg",
                 "music": "assets/songs/cake-theme.mp3",
                 "socials": {
-                    "discord": "1078313475727691787"
+                    "discord": "1078313475727691787",
+                    "roblox": "1341149456",
+                    "rhythia":"901"
                 }
             },
             {
                 "name": "oxy",
                 "displayName": "oxy",
                 "bio": "best fucking catfish",
-                "badges": ["owner"],
+                "badges": ["owner", "member", "dedicatedrsc"],
                 "icon": "assets/members/oxypfp.png",
                 "music": "assets/songs/oxy-theme.mp3",
-                "socials": {}
+                "socials": {
+                    "discord": "510436432100458506",
+                    "roblox": "105905395",
+                    "rhythia": "658"
+                }
             },
             {
                 "name": "pookie",
                 "displayName": "Pookie",
                 "bio": "hiya?",
-                "badges": ["owner"],
+                "badges": ["owner", "member", "dedicatedrsc"],
                 "icon": "assets/members/pookie.webp",
                 "music": "assets/songs/pookie-theme.mp3",
                 "socials": {
-                    "discord": "530619109596069919"
+                    "discord": "530619109596069919",
+                    "roblox": "105905395",
+                    "rhythia": "658"
                 }
             }
         ],
@@ -38,8 +46,8 @@
                 "name": "asozaki",
                 "displayName": "Asozaki",
                 "bio": "mania DEMON",
-                "badges": [],
-                "icon": "assets/members/asopfp.jpeg",
+                "badges": ["dedicatedrsc", "member"],
+                "icon": "assets/members/asopfp.png",
                 "socials": {
                     "discord": "510436432100458506"
                 }
@@ -48,58 +56,166 @@
                 "name": "lulusuki",
                 "displayName": "lulusuki",
                 "bio": "cool coding guy",
-                "badges": [],
+                "badges": ["dedicatedrsc", "member"],
                 "icon": "assets/members/fadedpfp.webp",
                 "music": "assets/songs/faded-theme.mp3",
                 "socials": {
-                    "discord": "893054723698069514"
+                    "discord": "893054723698069514",
+                    "github": "lulusuki"
                 }
             },
             {
                 "name": "shorned",
                 "displayName": "shorned",
                 "bio": "shorned",
-                "badges": [],
+                "badges": ["dedicatedrsc", "member"],
                 "icon": "assets/members/shornedpfp.webp",
                 "music": "assets/songs/shorned-theme.mp3",
                 "socials": {
-                    "discord": "510436432100458506"
+                    "rhythia": "510436432100458506",
+                    "twitch":"despostion",
+                    "instagram": "desposition"
                 }
             },
             {
                 "name": "kurzez",
                 "displayName": "Kurzez",
                 "bio": "its pronounced cures",
-                "badges": [],
+                "badges": ["dedicatedrsc", "member"],
                 "icon": "assets/members/kurzpfp.webp",
                 "music": "assets/songs/kurze-theme.mp3",
                 "socials": {
-                    "discord": "1400335244002988042"
+                    "discord": "1400335244002988042",
+                    "rhytiha": "107670",
+                    "roblox": "9063277982"
                 }
             },
             {
                 "name": "acid",
                 "displayName": "acid",
                 "bio": "just here",
-                "badges": [],
+                "badges": ["dedicatedrsc", "member"],
                 "icon": "assets/members/acidpfp.webp",
-                "socials": {}
+                "socials": {
+                    "rhythia":"40247",
+                    "roblox":"4743354620"
+                }
             },
             {
-                "name": "clyxer",
+                "name": "Clyxer",
                 "displayName": "Clyxer",
-                "bio": "The GOAT of RSC",
-                "badges": [],
+                "bio": "rscs best gambler",
+                "badges": ["dedicatedrsc", "member"],
                 "icon": "assets/members/clyxpfp.webp",
-                "socials": {}
+                "socials": {
+                    "discord":"756730692011950191",
+                    "spotify":"4cJKDGSv4Dz9QycXYmo565",
+                    "tiktok":"clyxran"
+                }
             },
             {
                 "name": "orbit",
                 "displayName": "orbit",
                 "bio": "pro mapper",
-                "badges": [],
+                "badges": ["dedicatedrsc", "member"],
                 "icon": "assets/members/orbitpfp.png",
-                "socials": {}
+                "socials": {
+                    "discord":"1350209185635111006",
+                    "twitch":"neptunesorb1t"
+                }
+            },
+            {
+                "name": "Zee",
+                "displayName": "Zee",
+                "bio": "best canadian",
+                "badges": ["dedicatedrsc", "member"],
+                "icon": "assets/members/zeepfp.webp",
+                "socials": {
+                    "discord":"706632789732873748",
+                    "roblox":"1301557073"
+                }
+            },
+            {
+                "name": "soulless",
+                "displayName": "Soulless",
+                "bio": "spin",
+                "badges": ["dedicatedrsc", "member"],
+                "icon": "assets/members/soullesspfp.webp",
+                "socials": {
+                    "discord":"706632789732873748",
+                    "roblox":"1301557073"
+                }
+            },
+            {
+                "name": "Van",
+                "displayName": "Van",
+                "bio": "just a guy",
+                "badges": ["dedicatedrsc", "member"],
+                "icon": "assets/members/vanpfp.webp",
+                "socials": {
+                    "discord":"754091599805546517"
+                }
+            },
+            {
+                "name": "Pyxenity",
+                "displayName": "Pyxenity",
+                "bio": ":3",
+                "badges": ["member"],
+                "icon": "assets/members/pixpfp.webp",
+                "socials": {
+                    "discord": "987842810982051950"
+                }
+            },
+            {
+                "name": "porshii",
+                "displayName": "porshii",
+                "bio": "porshii",
+                "badges": ["member"],
+                "icon": "assets/members/porshiipfp.webp",
+                "socials": {
+                    "rhythia":"187",
+                    "roblox": "91948244"
+                }
+            },
+            {
+                "name": "kappa",
+                "displayName": "kappa",
+                "bio": "kappa",
+                "badges": ["dedicatedrsc", "member"],
+                "icon": "assets/members/kappapfp.webp",
+                "socials": {
+                    "discord": "1286342201726472222"
+                }
+            },
+            {
+                "name": "mull",
+                "displayName": "mull",
+                "bio": "mull",
+                "badges": ["member"],
+                "icon": "assets/members/mullpfp.gif",
+                "socials": {
+                    "discord": "1196605803784843276"
+                }
+            },
+            {
+                "name": "trumoo",
+                "displayName": "trumoo",
+                "bio": "trumoo",
+                "badges": ["member"],
+                "icon": "assets/members/trupfp.webp",
+                "socials": {
+                    "discord": "701150131378061454"
+                }
+            },
+            {
+                "name": "lou",
+                "displayName": "lou",
+                "bio": "lou",
+                "badges": ["member"],
+                "icon": "assets/members/loupfp.webp",
+                "socials": {
+                    "discord": "1350214862499876969"
+                }
             }
         ]
     },
@@ -175,6 +291,11 @@
             "steam": {
                 "icon": "assets/socials/steam.svg",
                 "link": "https://steamcommunity.com/id/"
+            },
+            "rhythia": {
+                "icon": "assets/socials/rhythia.svg",
+                "link": "https://rhythia.come/player/"
+
             }
         }
     }

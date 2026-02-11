@@ -6,38 +6,36 @@ class ProfileMusicPlayer {
         this.isMuted = false;
         this.anthem = null;
         this.isPlayingProfile = false;
+        this.fadeOutDuration = 300; // ms
+        this.fadeInDuration = 1500; // ms (1.5 seconds)
         this.init();
-        
-        // Make this globally accessible for audio manager
+
         window.profileMusicPlayer = this;
     }
 
     init() {
-        // Setup anthem
+
         this.anthem = new Audio('https://github.com/zoxycontin/rsc-bio/raw/refs/heads/main/assets/songs/anthem.mp3');
         this.anthem.loop = true;
         this.anthem.volume = 0.25;
-        
-        // Listen for dynamically generated cards
+
         document.addEventListener('cardsGenerated', () => this.setupCardListeners());
-        
-        // Also setup for any existing cards
+
         this.setupCardListeners();
     }
 
     setupCardListeners() {
         const cards = document.querySelectorAll('.card');
         cards.forEach(card => {
-            // Avoid adding duplicate listeners
+
             if (card.hasAttribute('data-music-listener')) return;
             card.setAttribute('data-music-listener', 'true');
             
             const musicPath = card.dataset.music;
             if (musicPath) {
-                // Preload audio
+
                 this.preloadAudio(musicPath);
-                
-                // Play on hover - music continues after mouse leaves
+
                 card.addEventListener('mouseenter', () => {
                     this.playMusic(musicPath);
                 });
@@ -57,17 +55,17 @@ class ProfileMusicPlayer {
 
     playMusic(musicPath) {
         if (this.isMuted) return;
-        
-        // Don't restart if same music is already playing
+
         if (this.currentMusicPath === musicPath && this.currentAudio && !this.currentAudio.paused) {
             return;
         }
-        
-        this.stopMusic();
-        
-        // Pause anthem when playing profile music
-        if (this.anthem) {
-            this.anthem.pause();
+
+        if (this.currentAudio && !this.currentAudio.paused) {
+            this.fadeOut(this.currentAudio);
+        }
+
+        if (this.anthem && !this.anthem.paused) {
+            this.fadeOut(this.anthem);
         }
         
         const audio = this.audioCache.get(musicPath);
@@ -76,11 +74,14 @@ class ProfileMusicPlayer {
             this.currentMusicPath = musicPath;
             this.isPlayingProfile = true;
             audio.currentTime = 0;
+
+            audio.volume = 0;
             audio.play().catch(error => {
                 console.log("Audio play failed:", error);
             });
-            
-            // Update now playing display
+
+            this.fadeIn(audio);
+
             this.updateNowPlaying(musicPath);
         }
     }
@@ -94,18 +95,63 @@ class ProfileMusicPlayer {
             this.isPlayingProfile = false;
         }
     }
-    
-    // Called when navigating to a new section - returns to anthem
+
+    fadeOut(audio) {
+        const startVolume = audio.volume;
+        const startTime = Date.now();
+        
+        const fade = () => {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(elapsed / this.fadeOutDuration, 1);
+            audio.volume = startVolume * (1 - progress);
+            
+            if (progress < 1) {
+                requestAnimationFrame(fade);
+            } else {
+                audio.pause();
+                audio.currentTime = 0;
+                audio.volume = startVolume; // Reset volume for next play
+            }
+        };
+        
+        fade();
+    }
+
+    fadeIn(audio) {
+        const targetVolume = 0.25;
+        const startTime = Date.now();
+        
+        const fade = () => {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(elapsed / this.fadeInDuration, 1);
+            audio.volume = targetVolume * progress;
+            
+            if (progress < 1) {
+                requestAnimationFrame(fade);
+            }
+        };
+        
+        fade();
+    }
+
     returnToAnthem() {
         if (this.isMuted) return;
-        
-        this.stopMusic();
+
+        if (this.currentAudio && !this.currentAudio.paused) {
+            this.fadeOut(this.currentAudio);
+        }
         
         if (this.anthem) {
+            this.currentAudio = null;
+            this.currentMusicPath = null;
+            this.isPlayingProfile = false;
             this.anthem.currentTime = 0;
+            this.anthem.volume = 0;
             this.anthem.play().catch(error => {
                 console.log("Anthem play failed:", error);
             });
+
+            this.fadeIn(this.anthem);
             this.updateNowPlaying('anthem');
         }
     }
@@ -116,7 +162,7 @@ class ProfileMusicPlayer {
             if (musicPath === 'anthem') {
                 npTrack.textContent = 'RSC Anthem';
             } else {
-                // Extract track name from path
+
                 const trackName = musicPath.split('/').pop().replace('.mp3', '').replace('-theme', '');
                 npTrack.textContent = trackName.charAt(0).toUpperCase() + trackName.slice(1) + "'s Theme";
             }
@@ -132,8 +178,7 @@ class ProfileMusicPlayer {
             }
         }
     }
-    
-    // Initialize anthem playback
+
     initAnthem() {
         if (!this.isMuted && this.anthem && !this.isPlayingProfile) {
             this.anthem.play().catch(error => {
