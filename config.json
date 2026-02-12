@@ -293,11 +293,8 @@
                 "icon": "assets/socials/rhythia.svg",
                 "link": "https://rhythia.come/player/"
 
-            },
-             "soundcloud": {
-                "icon": "assets/socials/soundcloud.svg",
-                "link": "https://soundcloud.com/"
             }
+            
         }
     }
 }
