@@ -63,7 +63,7 @@ class CardClickHandler {
 
         this.checkUrlForMember();
 
-        window.addEventListener('hashchange', () => {
+        window.addEventListener('popstate', () => {
             this.checkUrlForMember();
         });
 
@@ -101,9 +101,9 @@ class CardClickHandler {
     }
 
     checkUrlForMember() {
-        const hash = window.location.hash;
-        if (hash.startsWith('#member=')) {
-            const memberName = hash.replace('#member=', '');
+        const path = window.location.pathname;
+        const memberName = path.replace(/^\//, '');
+        if (memberName && memberName !== '' && !memberName.includes('.') && !memberName.includes('/')) {
 
             const tryOpen = () => {
                 const card = document.querySelector(`.card[data-member="${memberName}"]`);
@@ -213,7 +213,7 @@ class CardClickHandler {
         this.startActivityTimer(memberName);
 
         if (memberName) {
-            window.history.pushState(null, '', `#member=${memberName}`);
+            window.history.pushState(null, '', `/${memberName}`);
         }
 
         this.incrementViews(memberName).then(viewCount => {
@@ -360,8 +360,8 @@ class CardClickHandler {
 
         this.overlay.classList.remove('active');
 
-        if (window.location.hash.startsWith('#member=')) {
-            window.history.pushState(null, '', window.location.pathname);
+        if (window.location.pathname !== '/') {
+            window.history.pushState(null, '', '/');
         }
 
         document.body.style.overflow = '';

@@ -4,6 +4,17 @@
     <title>Really Silly Club</title>
     <link rel="icon" href="assets/caticon.png"/>
     <link rel="stylesheet" href="css/styles.css">
+    <script>
+        // GitHub Pages SPA redirect: restore clean path from ?p= query param set by 404.html
+        (function() {
+            var sp = new URLSearchParams(window.location.search);
+            var p = sp.get('p');
+            if (p) {
+                var path = '/' + p.replace(/~and~/g, '&');
+                window.history.replaceState(null, '', path);
+            }
+        })();
+    </script>
     <script src="js/config-loader.js"></script>
     <script src="js/card-generator.js" defer></script>
     <script src="js/profile-music.js" defer></script>
