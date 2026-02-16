@@ -46,7 +46,7 @@
                 "name": "asozaki",
                 "displayName": "Asozaki",
                 "bio": "mania DEMON",
-                "badges": ["dedicatedrsc", "member"],
+                "badges": ["dedicatedrsc", "member", "moderator"],
                 "icon": "assets/members/asopfp.png",
                 "socials": {
                     "discord": "510436432100458506"
@@ -56,7 +56,7 @@
                 "name": "lulusuki",
                 "displayName": "lulusuki",
                 "bio": "cool coding guy",
-                "badges": ["dedicatedrsc", "member"],
+                "badges": ["dedicatedrsc", "member", "moderator"],
                 "icon": "assets/members/fadedpfp.webp",
                 "music": "assets/songs/faded-theme.mp3",
                 "socials": {
@@ -81,7 +81,7 @@
                 "name": "kurzez",
                 "displayName": "Kurzez",
                 "bio": "its pronounced cures",
-                "badges": ["dedicatedrsc", "member"],
+                "badges": ["dedicatedrsc", "member", "moderator"],
                 "icon": "assets/members/kurzpfp.webp",
                 "music": "assets/songs/kurze-theme.mp3",
                 "socials": {
@@ -105,7 +105,7 @@
                 "name": "Clyxer",
                 "displayName": "Clyxer",
                 "bio": "rscs best gambler",
-                "badges": ["dedicatedrsc", "member"],
+                "badges": ["dedicatedrsc", "member", "moderator"],
                 "icon": "assets/members/clyxpfp.webp",
                 "socials": {
                     "discord":"756730692011950191",
@@ -150,7 +150,8 @@
                 "name": "Van",
                 "displayName": "Van",
                 "bio": "just a guy",
-                "badges": ["dedicatedrsc", "member"],
+                "music": "assets/songs/van-theme.mp3",
+                "badges": ["dedicatedrsc", "member", "moderator"],
                 "icon": "assets/members/vanpfp.webp",
                 "socials": {
                     "discord":"754091599805546517"
@@ -217,6 +218,46 @@
                 "socials": {
                     "discord": "1350214862499876969"
                 }
+            },
+            {
+                "name": "bryce",
+                "displayName": "bryce",
+                "bio": "bryce",
+                "badges": ["member", "moderator"],
+                "icon": "assets/members/brycepfp.webp",
+                "socials": {
+                    "discord": "1159627314322227262"
+                }
+            },
+            {
+                "name": "omar",
+                "displayName": "omar",
+                "bio": "omar",
+                "badges": ["member"],
+                "icon": "assets/members/onomopfp.webp",
+                "socials": {
+                    "discord": "620060841802465280"
+                }
+            },
+            {
+                "name": "tizi",
+                "displayName": "tizi",
+                "bio": "tizi",
+                "badges": ["member"],
+                "icon": "assets/members/tizipfp.webp",
+                "socials": {
+                    "discord": "888724672596836352"
+                }
+            },
+            {
+                "name": "seb",
+                "displayName": "seb",
+                "bio": "seb",
+                "badges": ["member"],
+                "icon": "assets/members/sebpfp.webp",
+                "socials": {
+                    "discord": "1018657725426716694"
+                }
             }
         ]
     },
@@ -229,6 +270,10 @@
         "developer": {
             "file": "developer.png",
             "displayName": "Developer"
+        },
+        "moderator":{
+            "file": "moderator.png",
+            "displayName": "Moderator"
         },
         "dedicatedrsc": {
             "file": "dedicatedRSC.png",
@@ -291,10 +336,15 @@
             },
             "rhythia": {
                 "icon": "assets/socials/rhythia.svg",
-                "link": "https://rhythia.come/player/"
+                "link": "https://rhythia.com/player/"
 
+            },
+            "soundcloud":{
+                "icon": "assets/socials/soundcloud.svg",
+                "link": "https://soundcloud.com/"
             }
-            
+
+
         }
     }
 }

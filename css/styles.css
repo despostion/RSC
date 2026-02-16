@@ -564,6 +564,7 @@ main {
     box-shadow: none;
 }
 
+/*
 .status-indicator[data-status="online"]::after {
     content: '';
     position: absolute;
@@ -574,7 +575,7 @@ main {
     border-radius: 50%;
     border: 2px solid #43b581;
 }
-/*
+
 @keyframes statusPulse {
     0%, 100% {
         opacity: 0;

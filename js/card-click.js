@@ -2,32 +2,56 @@ class CardClickHandler {
     constructor() {
         this.overlay = null;
         this.currentExpandedCard = null;
-        this.viewsKey = 'rsc-profile-views';
+        this.countApiNamespace = 'rsc-profile-views';
         this.sessionViewedKey = 'rsc-profile-viewed-session';
+        this.localViewsKey = 'rsc-profile-views-local';
         this.activityIntervalId = null;
         this.init();
 
         window.cardClickHandler = this;
     }
 
-    getViews(memberName) {
-        const views = JSON.parse(localStorage.getItem(this.viewsKey) || '{}');
-        return views[memberName] || 0;
+    sanitizeKey(memberName) {
+        return memberName.toLowerCase().replace(/[^a-z0-9]/g, '-');
     }
 
-    
-    incrementViews(memberName) {
+    async fetchViews(memberName) {
+        const key = this.sanitizeKey(memberName);
+        try {
+            const res = await fetch(`https://api.countapi.xyz/get/${this.countApiNamespace}/${key}`);
+            if (res.ok) {
+                const data = await res.json();
+                return data.value || 0;
+            }
+        } catch (e) {
+            console.warn('CountAPI fetch failed, using local fallback');
+        }
+        const local = JSON.parse(localStorage.getItem(this.localViewsKey) || '{}');
+        return local[memberName] || 0;
+    }
+
+    async incrementViews(memberName) {
         const viewed = JSON.parse(sessionStorage.getItem(this.sessionViewedKey) || '{}');
         if (viewed[memberName]) {
-            return this.getViews(memberName);
+            return this.fetchViews(memberName);
         }
         viewed[memberName] = true;
         sessionStorage.setItem(this.sessionViewedKey, JSON.stringify(viewed));
 
-        const views = JSON.parse(localStorage.getItem(this.viewsKey) || '{}');
-        views[memberName] = (views[memberName] || 0) + 1;
-        localStorage.setItem(this.viewsKey, JSON.stringify(views));
-        return views[memberName];
+        const key = this.sanitizeKey(memberName);
+        try {
+            const res = await fetch(`https://api.countapi.xyz/hit/${this.countApiNamespace}/${key}`);
+            if (res.ok) {
+                const data = await res.json();
+                return data.value || 0;
+            }
+        } catch (e) {
+            console.warn('CountAPI hit failed, using local fallback');
+        }
+        const local = JSON.parse(localStorage.getItem(this.localViewsKey) || '{}');
+        local[memberName] = (local[memberName] || 0) + 1;
+        localStorage.setItem(this.localViewsKey, JSON.stringify(local));
+        return local[memberName];
     }
 
     init() {
@@ -125,8 +149,6 @@ class CardClickHandler {
             window.profileMusicPlayer.playMusic(musicPath);
         }
 
-        const viewCount = this.incrementViews(memberName);
-
         const expandedCard = document.createElement('div');
         expandedCard.className = 'card-expanded';
 
@@ -176,8 +198,8 @@ class CardClickHandler {
                         <circle cx="12" cy="12" r="3"></circle>
                     </svg>
                 </span>
-                <span class="view-count">${viewCount}</span>
-                <span class="view-label">${viewCount === 1 ? 'view' : 'views'}</span>
+                <span class="view-count">...</span>
+                <span class="view-label">views</span>
             </div>
         `;
 
@@ -193,6 +215,13 @@ class CardClickHandler {
         if (memberName) {
             window.history.pushState(null, '', `#member=${memberName}`);
         }
+
+        this.incrementViews(memberName).then(viewCount => {
+            const viewCountEl = expandedCard.querySelector('.view-count');
+            const viewLabelEl = expandedCard.querySelector('.view-label');
+            if (viewCountEl) viewCountEl.textContent = viewCount;
+            if (viewLabelEl) viewLabelEl.textContent = viewCount === 1 ? 'view' : 'views';
+        });
 
         setTimeout(() => {
             expandedCard.classList.add('active');
