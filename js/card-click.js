@@ -2,9 +2,10 @@ class CardClickHandler {
     constructor() {
         this.overlay = null;
         this.currentExpandedCard = null;
-        this.countApiNamespace = 'rsc-profile-views';
-        this.sessionViewedKey = 'rsc-profile-viewed-session';
-        this.localViewsKey = 'rsc-profile-views-local';
+        this.countApiNamespace = 'rsc-profile-likes';
+        this.useRemoteLikes = false;
+        this.localLikesKey = 'rsc-profile-likes-local';
+        this.userLikesKey = 'rsc-profile-liked-members';
         this.activityIntervalId = null;
         this.init();
 
@@ -15,7 +16,47 @@ class CardClickHandler {
         return memberName.toLowerCase().replace(/[^a-z0-9]/g, '-');
     }
 
-    async fetchViews(memberName) {
+    getUserLikes() {
+        return JSON.parse(localStorage.getItem(this.userLikesKey) || '{}');
+    }
+
+    isMemberLiked(memberName) {
+        const likes = this.getUserLikes();
+        return !!likes[memberName];
+    }
+
+    setMemberLiked(memberName, isLiked) {
+        const likes = this.getUserLikes();
+        if (isLiked) {
+            likes[memberName] = true;
+        } else {
+            delete likes[memberName];
+        }
+        localStorage.setItem(this.userLikesKey, JSON.stringify(likes));
+    }
+
+    getLocalLikes() {
+        return JSON.parse(localStorage.getItem(this.localLikesKey) || '{}');
+    }
+
+    getLocalLikeCount(memberName) {
+        const local = this.getLocalLikes();
+        return local[memberName] || 0;
+    }
+
+    setLocalLikeCount(memberName, value) {
+        const local = this.getLocalLikes();
+        local[memberName] = Math.max(0, value);
+        localStorage.setItem(this.localLikesKey, JSON.stringify(local));
+        return local[memberName];
+    }
+
+    async fetchLikes(memberName) {
+        const fallbackCount = this.getLocalLikeCount(memberName);
+        if (!this.useRemoteLikes) {
+            return fallbackCount;
+        }
+
         const key = this.sanitizeKey(memberName);
         try {
             const res = await fetch(`https://api.countapi.xyz/get/${this.countApiNamespace}/${key}`);
@@ -23,35 +64,69 @@ class CardClickHandler {
                 const data = await res.json();
                 return data.value || 0;
             }
-        } catch (e) {
-            console.warn('CountAPI fetch failed, using local fallback');
+        } catch (_) {
+            return fallbackCount;
         }
-        const local = JSON.parse(localStorage.getItem(this.localViewsKey) || '{}');
-        return local[memberName] || 0;
+        return fallbackCount;
     }
 
-    async incrementViews(memberName) {
-        const viewed = JSON.parse(sessionStorage.getItem(this.sessionViewedKey) || '{}');
-        if (viewed[memberName]) {
-            return this.fetchViews(memberName);
+    async updateLikes(memberName, delta) {
+        const localCount = this.setLocalLikeCount(memberName, this.getLocalLikeCount(memberName) + delta);
+        if (!this.useRemoteLikes) {
+            return localCount;
         }
-        viewed[memberName] = true;
-        sessionStorage.setItem(this.sessionViewedKey, JSON.stringify(viewed));
 
         const key = this.sanitizeKey(memberName);
         try {
-            const res = await fetch(`https://api.countapi.xyz/hit/${this.countApiNamespace}/${key}`);
+            const res = await fetch(`https://api.countapi.xyz/update/${this.countApiNamespace}/${key}?amount=${delta}`);
             if (res.ok) {
                 const data = await res.json();
                 return data.value || 0;
             }
-        } catch (e) {
-            console.warn('CountAPI hit failed, using local fallback');
+        } catch (_) {
+            return localCount;
         }
-        const local = JSON.parse(localStorage.getItem(this.localViewsKey) || '{}');
-        local[memberName] = (local[memberName] || 0) + 1;
-        localStorage.setItem(this.localViewsKey, JSON.stringify(local));
-        return local[memberName];
+        return localCount;
+    }
+
+    updateLikeUi(cardElement, likeCount, isLiked) {
+        if (!cardElement) return;
+
+        const likeCountEl = cardElement.querySelector('.like-count');
+        const likeLabelEl = cardElement.querySelector('.like-label');
+        const likeBtn = cardElement.querySelector('.profile-like-btn');
+
+        if (likeCountEl && typeof likeCount === 'number') {
+            likeCountEl.textContent = likeCount;
+        }
+        if (likeLabelEl && typeof likeCount === 'number') {
+            likeLabelEl.textContent = likeCount === 1 ? 'like' : 'likes';
+        }
+        if (likeBtn) {
+            likeBtn.classList.toggle('liked', isLiked);
+            likeBtn.setAttribute('aria-pressed', isLiked ? 'true' : 'false');
+            likeBtn.setAttribute('title', isLiked ? 'Unlike profile' : 'Like profile');
+        }
+    }
+
+    async handleLikeToggle(memberName, cardElement) {
+        const likeBtn = cardElement.querySelector('.profile-like-btn');
+        if (!likeBtn || likeBtn.disabled) return;
+
+        const currentlyLiked = this.isMemberLiked(memberName);
+        const delta = currentlyLiked ? -1 : 1;
+        const newLikedState = !currentlyLiked;
+
+        likeBtn.disabled = true;
+        try {
+            const updatedCount = await this.updateLikes(memberName, delta);
+            this.setMemberLiked(memberName, newLikedState);
+            this.updateLikeUi(cardElement, updatedCount, newLikedState);
+        } catch (_) {
+            this.updateLikeUi(cardElement, this.getLocalLikeCount(memberName), this.isMemberLiked(memberName));
+        } finally {
+            likeBtn.disabled = false;
+        }
     }
 
     init() {
@@ -191,15 +266,14 @@ class CardClickHandler {
             <div class="activity-status" data-member="${memberName}">${activityText}</div>
             ${memberBio ? `<div class="member-bio">${memberBio.innerHTML}</div>` : ''}
             ${socialLinksHtml}
-            <div class="profile-views">
-                <span class="view-icon">
+            <div class="profile-likes">
+                <button class="profile-like-btn" type="button" aria-pressed="false" title="Like profile" aria-label="Like profile">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                     </svg>
-                </span>
-                <span class="view-count">...</span>
-                <span class="view-label">views</span>
+                </button>
+                <span class="like-count">...</span>
+                <span class="like-label">likes</span>
             </div>
         `;
 
@@ -216,11 +290,21 @@ class CardClickHandler {
             window.history.pushState(null, '', `/${memberName}`);
         }
 
-        this.incrementViews(memberName).then(viewCount => {
-            const viewCountEl = expandedCard.querySelector('.view-count');
-            const viewLabelEl = expandedCard.querySelector('.view-label');
-            if (viewCountEl) viewCountEl.textContent = viewCount;
-            if (viewLabelEl) viewLabelEl.textContent = viewCount === 1 ? 'view' : 'views';
+        const likeButton = expandedCard.querySelector('.profile-like-btn');
+        if (likeButton) {
+            likeButton.addEventListener('click', (event) => {
+                event.stopPropagation();
+                this.handleLikeToggle(memberName, expandedCard);
+            });
+        }
+
+        const initiallyLiked = this.isMemberLiked(memberName);
+        this.updateLikeUi(expandedCard, this.getLocalLikeCount(memberName), initiallyLiked);
+
+        this.fetchLikes(memberName).then((likeCount) => {
+            this.setLocalLikeCount(memberName, likeCount);
+            this.updateLikeUi(expandedCard, this.getLocalLikeCount(memberName), this.isMemberLiked(memberName));
+        }).catch(() => {
         });
 
         setTimeout(() => {

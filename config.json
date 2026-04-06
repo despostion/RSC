@@ -49,7 +49,8 @@
                 "badges": ["dedicatedrsc", "member", "moderator"],
                 "icon": "assets/members/asopfp.png",
                 "socials": {
-                    "discord": "510436432100458506"
+                    "discord": "510436432100458506",
+                    "roblox": "105905395"
                 }
             },
             {
@@ -70,7 +71,6 @@
                 "bio": "shorned",
                 "badges": ["dedicatedrsc", "member"],
                 "icon": "assets/members/shornedpfp.webp",
-                "music": "assets/songs/shorned-theme.mp3",
                 "socials": {
                     "rhythia": "510436432100458506",
                     "twitch":"despostion",
@@ -232,11 +232,13 @@
             {
                 "name": "omar",
                 "displayName": "omar",
-                "bio": "omar",
+                "bio": "get real",
                 "badges": ["member"],
-                "icon": "assets/members/onomopfp.webp",
+                "icon": "assets/members/omarpfp.webp",
+                "music": "assets/songs/omar-theme.mp3",
                 "socials": {
-                    "discord": "620060841802465280"
+                    "discord": "620060841802465280",
+                    "tiktok":"onomatopoe.ia"
                 }
             },
             {
@@ -258,7 +260,108 @@
                 "socials": {
                     "discord": "1018657725426716694"
                 }
+            },
+            {
+                "name": "Alin",
+                "displayName": "Alin",
+                "bio": "Romance anime enthusiast",
+                "badges": ["member"],
+                "icon": "assets/members/alinpfp.webp",
+                "music": "assets/songs/alin-theme.mp3",
+                "socials": {
+                    "discord": "858804883657850911",
+                    "spotify": "313lsc7dagxqbskx6fpkcyofnayi?si=1lldG4h0R9uGd1YxH9R9dA&nd=1&dlsi=331c1c31163c4cce"
+                }
+            },
+            {
+                "name": "Luna",
+                "displayName": "Luna",
+                "bio": "don't let a good day distract you from the failure you have become",
+                "badges": ["member"],
+                "icon": "assets/members/lunapfp.webp",
+                "socials": {
+                    "discord": "1175283230136598559"
+                }
+            },
+            {
+                "name": "lehil",
+                "displayName": "lehil",
+                "bio": "hello Virtual_Pixelation!!!!! i am on site(tv)!!!!",
+                "badges": ["member"],
+                "icon": "assets/members/lehilpfp.webp",
+                "socials": {
+                    "discord": "962780398583156828",
+                    "roblox": "462548267"
+                }
+            },
+            {
+                "name": "akzun",
+                "displayName": "akzun",
+                "bio": " ",
+                "music": "assets/songs/akzun-theme.mp3",
+                "badges": ["member"],
+                "icon": "assets/members/akzunpfp.webp",
+                "socials": {
+                    "discord": "609005930373316626"
+                }
+            },
+            {
+                "name": "shapira",
+                "displayName": "shapira",
+                "bio": "Mossad been paying good",
+                "badges": ["member"],
+                "icon": "assets/members/shapirapfp.png",
+                "socials": {
+                    "discord": "852533610963664950"
+                }
+            },
+            {
+                "name": "oneup",
+                "displayName": "oneup",
+                "bio": "i barely play rhythia lmfao, all i wanna do is spread my atrocious rock music taste to yall",
+                "badges": ["member"],
+                "icon": "assets/members/oneuppfp.webp",
+                "music": "assets/songs/oneup-theme.mp3",
+                "socials": {
+                    "discord": "614818385515118592",
+                    "twitter": "oneupstorm",
+                    "spotify": "316sc7nzscceky4v22g7ua3yxy4a?si=ec31c479350f42f8&nd=1&dlsi=337385ee9b294194"
+                }
+            },
+            {
+                "name": "XMC",
+                "displayName": "XMC",
+                "bio": "ummm idk",
+                "badges": ["member"],
+                "icon": "assets/members/xmcpfp.webp",
+                "music": "assets/songs/xmc-theme.mp3",
+                "socials": {
+                    "discord": "726264937957031987",
+                    "roblox": "4020808995",
+                    "tiktok": "xmc.od"
+                }
+            },
+            {
+                "name": "cunev",
+                "displayName": "cunev",
+                "bio": "steam rhythia goat",
+                "badges": ["member"],
+                "icon": "assets/members/cunevpfp.webp",
+                "socials": {
+                    "discord": "981345633308921886"
+                }
+            },
+            {
+                "name": "blossom",
+                "displayName": "blossom",
+                "bio": "meow",
+                "badges": ["member"],
+                "icon": "assets/members/blossompfp.webp",
+                "socials": {
+                    "discord": "492506505313255433"
+                }
             }
+
         ]
     },
 
