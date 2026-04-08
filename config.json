@@ -50,7 +50,8 @@
                 "icon": "assets/members/asopfp.png",
                 "socials": {
                     "discord": "510436432100458506",
-                    "roblox": "105905395"
+                    "roblox": "105905395",
+                    "rhythia": "658"
                 }
             },
             {
@@ -71,8 +72,9 @@
                 "bio": "shorned",
                 "badges": ["dedicatedrsc", "member"],
                 "icon": "assets/members/shornedpfp.webp",
+                "music": "assets/songs/shorned-theme.mp3",
                 "socials": {
-                    "rhythia": "510436432100458506",
+                    "discord": "251130366029463552",
                     "twitch":"despostion",
                     "instagram": "desposition"
                 }
@@ -289,6 +291,7 @@
                 "bio": "hello Virtual_Pixelation!!!!! i am on site(tv)!!!!",
                 "badges": ["member"],
                 "icon": "assets/members/lehilpfp.webp",
+                "music": "assets/songs/lehil-theme.mp3",
                 "socials": {
                     "discord": "962780398583156828",
                     "roblox": "462548267"
