@@ -106,9 +106,9 @@
             {
                 "name": "Clyxer",
                 "displayName": "Clyxer",
-                "bio": "rscs best gambler",
+                "bio": "RSC's Best Gambler",
                 "badges": ["dedicatedrsc", "member", "moderator"],
-                "icon": "assets/members/clyxpfp.webp",
+                "icon": "assets/members/clyxerpfp.webp",
                 "socials": {
                     "discord":"756730692011950191",
                     "spotify":"4cJKDGSv4Dz9QycXYmo565",
@@ -393,7 +393,12 @@
 
     "config": {
         "discord": "https://discord.gg/442jszx9ae",
+        "discordWidgetUrl": "https://discord.com/api/guilds/1313352737710145577/widget.json",
         "badgesPath": "assets/badges/",
+        "supabase": {
+            "url": "https://sicjwnvldhycauvipzyp.supabase.co",
+            "anonKey": "sb_publishable_BdPlxP2_BGlG-vGBJuqrcA_975RFtzE"
+        },
 
         "platforms": {
             "instagram": {

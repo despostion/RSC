@@ -30,8 +30,10 @@ class CardGenerator {
         const membersContainer = document.querySelector('#membersContainer');
         if (membersContainer && config.profiles.members) {
             membersContainer.innerHTML = '';
-            config.profiles.members.forEach(profile => {
-                membersContainer.appendChild(this.createCard(profile));
+            config.profiles.members.forEach((profile, index) => {
+                const card = this.createCard(profile);
+                card.setAttribute('data-original-index', String(index));
+                membersContainer.appendChild(card);
             });
         }
 

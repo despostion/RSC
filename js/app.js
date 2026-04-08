@@ -1,7 +1,3 @@
-
-
-
-
 class RSCApp {
     constructor() {
         this.currentSection = 'about';
@@ -71,14 +67,32 @@ class RSCApp {
 
     
     async fetchDiscordMemberCount() {
+        let widgetUrl = 'https://discord.com/api/guilds/1313352737710145577/widget.json';
         let inviteUrl = 'https://discord.com/api/v10/invites/442jszx9ae?with_counts=true';
         if (window.configLoader && window.configLoader.loaded) {
+            const configuredWidgetUrl = window.configLoader.config?.config?.discordWidgetUrl;
+            if (configuredWidgetUrl && typeof configuredWidgetUrl === 'string') {
+                widgetUrl = configuredWidgetUrl;
+            }
+
             const discord = window.configLoader.config?.config?.discord;
             if (discord && typeof discord === 'string') {
                 const match = discord.match(/discord\.gg\/([a-zA-Z0-9]+)/) || discord.match(/invite\/([a-zA-Z0-9]+)/);
                 if (match) inviteUrl = `https://discord.com/api/v10/invites/${match[1]}?with_counts=true`;
             }
         }
+
+        try {
+            const widgetRes = await fetch(widgetUrl);
+            if (widgetRes.ok) {
+                const widgetData = await widgetRes.json();
+                if (typeof widgetData?.member_count === 'number') {
+                    return widgetData.member_count;
+                }
+            }
+        } catch (_) {
+        }
+
         const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(inviteUrl);
         const res = await fetch(proxyUrl);
         if (!res.ok) return null;
@@ -88,18 +102,53 @@ class RSCApp {
 
     
     async fetchSiteVisitCount() {
-        const storageKey = 'rsc-site-visits';
-        const sessionKey = 'rsc-visit-counted';
+        const storageKey = 'rsc-site-visits-fallback';
+        const sessionCountedKey = 'rsc-visit-counted';
+        const sessionIdKey = 'rsc-visit-session-id';
 
-        let visits = parseInt(localStorage.getItem(storageKey)) || 0;
+        const getFallbackCount = () => {
+            let visits = parseInt(localStorage.getItem(storageKey), 10) || 0;
+            if (!sessionStorage.getItem(sessionCountedKey)) {
+                visits++;
+                localStorage.setItem(storageKey, String(visits));
+                sessionStorage.setItem(sessionCountedKey, 'true');
+            }
+            return visits;
+        };
 
-        if (!sessionStorage.getItem(sessionKey)) {
-            visits++;
-            localStorage.setItem(storageKey, String(visits));
-            sessionStorage.setItem(sessionKey, 'true');
+        if (!window.supabaseService) {
+            return getFallbackCount();
         }
 
-        return visits;
+        await window.supabaseService.readyPromise;
+        if (!window.supabaseService.enabled) {
+            return getFallbackCount();
+        }
+
+        let sessionId = sessionStorage.getItem(sessionIdKey);
+        if (!sessionId) {
+            if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+                sessionId = window.crypto.randomUUID();
+            } else {
+                sessionId = `rsc-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+            }
+            sessionStorage.setItem(sessionIdKey, sessionId);
+        }
+
+        if (!sessionStorage.getItem(sessionCountedKey)) {
+            const updatedCount = await window.supabaseService.trackVisitForSession(sessionId);
+            if (typeof updatedCount === 'number') {
+                sessionStorage.setItem(sessionCountedKey, 'true');
+                return updatedCount;
+            }
+        }
+
+        const remoteCount = await window.supabaseService.getVisitCount();
+        if (typeof remoteCount === 'number') {
+            return remoteCount;
+        }
+
+        return getFallbackCount();
     }
 
     setupTheme() {

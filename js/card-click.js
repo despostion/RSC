@@ -2,8 +2,6 @@ class CardClickHandler {
     constructor() {
         this.overlay = null;
         this.currentExpandedCard = null;
-        this.countApiNamespace = 'rsc-profile-likes';
-        this.useRemoteLikes = false;
         this.localLikesKey = 'rsc-profile-likes-local';
         this.userLikesKey = 'rsc-profile-liked-members';
         this.activityIntervalId = null;
@@ -53,16 +51,20 @@ class CardClickHandler {
 
     async fetchLikes(memberName) {
         const fallbackCount = this.getLocalLikeCount(memberName);
-        if (!this.useRemoteLikes) {
+
+        if (!window.supabaseService) {
             return fallbackCount;
         }
 
-        const key = this.sanitizeKey(memberName);
+        await window.supabaseService.readyPromise;
+        if (!window.supabaseService.enabled) {
+            return fallbackCount;
+        }
+
         try {
-            const res = await fetch(`https://api.countapi.xyz/get/${this.countApiNamespace}/${key}`);
-            if (res.ok) {
-                const data = await res.json();
-                return data.value || 0;
+            const remoteCount = await window.supabaseService.getLikeCount(memberName);
+            if (typeof remoteCount === 'number') {
+                return remoteCount;
             }
         } catch (_) {
             return fallbackCount;
@@ -72,16 +74,21 @@ class CardClickHandler {
 
     async updateLikes(memberName, delta) {
         const localCount = this.setLocalLikeCount(memberName, this.getLocalLikeCount(memberName) + delta);
-        if (!this.useRemoteLikes) {
+
+        if (!window.supabaseService) {
             return localCount;
         }
 
-        const key = this.sanitizeKey(memberName);
+        await window.supabaseService.readyPromise;
+        if (!window.supabaseService.enabled) {
+            return localCount;
+        }
+
         try {
-            const res = await fetch(`https://api.countapi.xyz/update/${this.countApiNamespace}/${key}?amount=${delta}`);
-            if (res.ok) {
-                const data = await res.json();
-                return data.value || 0;
+            const sessionId = window.supabaseService.sessionId || window.supabaseService.getSessionId();
+            const remoteCount = await window.supabaseService.incrementLike(memberName, delta, sessionId);
+            if (typeof remoteCount === 'number') {
+                return remoteCount;
             }
         } catch (_) {
             return localCount;

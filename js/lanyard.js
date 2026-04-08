@@ -7,6 +7,7 @@ class LanyardIntegration {
         this.retryAttempts = new Map();
         this.maxRetries = 5;
         this.retryDelay = 3000;
+        this.isReorderScheduled = false;
 
         this.discordIds = {};
         
@@ -40,6 +41,7 @@ class LanyardIntegration {
     setupLanyard() {
 
         const cards = document.querySelectorAll('.card[data-member]');
+        this.ensureOriginalMemberOrder();
         
         cards.forEach(card => {
             const memberName = card.getAttribute('data-member');
@@ -50,6 +52,20 @@ class LanyardIntegration {
                 this.addStatusIndicator(card);
 
                 this.connectToLanyard(memberName, discordId);
+            }
+        });
+
+        this.scheduleMemberReorder();
+    }
+
+    ensureOriginalMemberOrder() {
+        const membersContainer = document.querySelector('#membersContainer');
+        if (!membersContainer) return;
+
+        const cards = membersContainer.querySelectorAll('.card[data-member]');
+        cards.forEach((card, index) => {
+            if (!card.hasAttribute('data-original-index')) {
+                card.setAttribute('data-original-index', String(index));
             }
         });
     }
@@ -146,6 +162,52 @@ class LanyardIntegration {
         const activities = presenceData.activities || [];
 
         this.updateCardStatus(memberName, status, activities);
+        this.scheduleMemberReorder();
+    }
+
+    scheduleMemberReorder() {
+        if (this.isReorderScheduled) return;
+
+        this.isReorderScheduled = true;
+        requestAnimationFrame(() => {
+            this.isReorderScheduled = false;
+            this.reorderMembersByPresence();
+        });
+    }
+
+    reorderMembersByPresence() {
+        const membersContainer = document.querySelector('#membersContainer');
+        if (!membersContainer) return;
+
+        const cards = [...membersContainer.querySelectorAll('.card[data-member]')];
+        if (cards.length === 0) return;
+
+        cards
+            .sort((leftCard, rightCard) => {
+                const leftMember = leftCard.getAttribute('data-member');
+                const rightMember = rightCard.getAttribute('data-member');
+                const leftPriority = this.getMemberPresencePriority(leftMember);
+                const rightPriority = this.getMemberPresencePriority(rightMember);
+
+                if (leftPriority !== rightPriority) {
+                    return leftPriority - rightPriority;
+                }
+
+                const leftIndex = parseInt(leftCard.getAttribute('data-original-index') || '0', 10);
+                const rightIndex = parseInt(rightCard.getAttribute('data-original-index') || '0', 10);
+                return leftIndex - rightIndex;
+            })
+            .forEach(card => membersContainer.appendChild(card));
+    }
+
+    getMemberPresencePriority(memberName) {
+        const status = this.userStates.get(memberName)?.discord_status;
+
+        if (status === 'online' || status === 'idle' || status === 'dnd') {
+            return 0;
+        }
+
+        return 1;
     }
 
     updateCardStatus(memberName, status, activities) {
