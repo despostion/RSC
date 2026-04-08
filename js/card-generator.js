@@ -2,7 +2,7 @@ class CardGenerator {
     constructor() {
         this.init();
     }
-// test
+
     async init() {
 
         await window.configLoader.load();
