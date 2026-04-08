@@ -31,26 +31,26 @@ class RSCApp {
         const visitsStat = this.getStatCardByLabel('site visits');
         if (!membersStat || !visitsStat) return;
 
-        try {
-            const [memberCount, visitCount] = await Promise.all([
-                this.fetchDiscordMemberCount(),
-                this.fetchSiteVisitCount()
-            ]);
+        const [memberResult, visitsResult] = await Promise.allSettled([
+            this.fetchDiscordMemberCount(),
+            this.fetchSiteVisitCount()
+        ]);
 
-            if (memberCount != null) {
-                membersStat.setAttribute('data-target', String(memberCount));
-                if (document.getElementById('about').classList.contains('active')) {
-                    this.animateStats([membersStat]);
-                }
-            }
-            if (visitCount != null) {
-                visitsStat.setAttribute('data-target', String(visitCount));
-                if (document.getElementById('about').classList.contains('active')) {
-                    this.animateStats([visitsStat]);
-                }
-            }
-        } catch (_) {
+        const memberCount = memberResult.status === 'fulfilled' ? memberResult.value : null;
+        const visitCount = visitsResult.status === 'fulfilled' ? visitsResult.value : null;
 
+        if (memberCount != null) {
+            membersStat.setAttribute('data-target', String(memberCount));
+            if (document.getElementById('about').classList.contains('active')) {
+                this.animateStats([membersStat]);
+            }
+        }
+
+        if (visitCount != null) {
+            visitsStat.setAttribute('data-target', String(visitCount));
+            if (document.getElementById('about').classList.contains('active')) {
+                this.animateStats([visitsStat]);
+            }
         }
     }
 

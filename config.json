@@ -109,6 +109,7 @@
                 "bio": "RSC's Best Gambler",
                 "badges": ["dedicatedrsc", "member", "moderator"],
                 "icon": "assets/members/clyxerpfp.webp",
+                "music": "assets/songs/clyxer-theme.mp3",
                 "socials": {
                     "discord":"756730692011950191",
                     "spotify":"4cJKDGSv4Dz9QycXYmo565",
@@ -362,6 +363,16 @@
                 "icon": "assets/members/blossompfp.webp",
                 "socials": {
                     "discord": "492506505313255433"
+                }
+            },
+            {
+                "name": "mort",
+                "displayName": "mort",
+                "bio": "OOOOOOOOOH KING JULIANNNNNNNNNNNNNNNNNNNNNN",
+                "badges": ["member", "dedicatedrsc"],
+                "icon": "assets/members/mortpfp.webp",
+                "socials": {
+                    "discord": "1274180081383772187"
                 }
             }
 
