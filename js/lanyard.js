@@ -7,7 +7,10 @@ class LanyardIntegration {
         this.retryAttempts = new Map();
         this.maxRetries = 5;
         this.retryDelay = 3000;
-        this.isReorderScheduled = false;
+        this.reorderTimer = null;
+        this.reorderDelay = 150;
+        this.initialReorderDelay = 1100;
+        this.connectedMembers = new Set();
 
         this.discordIds = {};
         
@@ -51,7 +54,10 @@ class LanyardIntegration {
 
                 this.addStatusIndicator(card);
 
-                this.connectToLanyard(memberName, discordId);
+                if (!this.connectedMembers.has(memberName)) {
+                    this.connectedMembers.add(memberName);
+                    this.connectToLanyard(memberName, discordId);
+                }
             }
         });
 
@@ -166,13 +172,19 @@ class LanyardIntegration {
     }
 
     scheduleMemberReorder() {
-        if (this.isReorderScheduled) return;
+        if (this.reorderTimer) {
+            clearTimeout(this.reorderTimer);
+        }
 
-        this.isReorderScheduled = true;
-        requestAnimationFrame(() => {
-            this.isReorderScheduled = false;
+        const membersContainer = document.querySelector('#membersContainer');
+        const delay = membersContainer && membersContainer.classList.contains('cards-settled')
+            ? this.reorderDelay
+            : this.initialReorderDelay;
+
+        this.reorderTimer = setTimeout(() => {
+            this.reorderTimer = null;
             this.reorderMembersByPresence();
-        });
+        }, delay);
     }
 
     reorderMembersByPresence() {
@@ -182,7 +194,7 @@ class LanyardIntegration {
         const cards = [...membersContainer.querySelectorAll('.card[data-member]')];
         if (cards.length === 0) return;
 
-        cards
+        const sortedCards = [...cards]
             .sort((leftCard, rightCard) => {
                 const leftMember = leftCard.getAttribute('data-member');
                 const rightMember = rightCard.getAttribute('data-member');
@@ -196,8 +208,14 @@ class LanyardIntegration {
                 const leftIndex = parseInt(leftCard.getAttribute('data-original-index') || '0', 10);
                 const rightIndex = parseInt(rightCard.getAttribute('data-original-index') || '0', 10);
                 return leftIndex - rightIndex;
-            })
-            .forEach(card => membersContainer.appendChild(card));
+            });
+
+        const orderChanged = sortedCards.some((card, index) => card !== cards[index]);
+        if (!orderChanged) return;
+
+        const fragment = document.createDocumentFragment();
+        sortedCards.forEach(card => fragment.appendChild(card));
+        membersContainer.appendChild(fragment);
     }
 
     getMemberPresencePriority(memberName) {
@@ -272,6 +290,7 @@ class LanyardIntegration {
             ws.close();
         });
         this.websockets.clear();
+        this.connectedMembers.clear();
         this.userStates.clear();
     }
 }
