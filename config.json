@@ -587,6 +587,137 @@
             }
           ]
         }
+      },
+      {
+        "name": "boofrz",
+        "displayName": "boofrz",
+        "bio": "i make maps",
+        "quote": "very tired",
+        "badges": [
+          "member"
+        ],
+        "icon": "https://cdn.discordapp.com/ephemeral-attachments/1511026358845833489/1511034915305554062/monty.jpg?ex=6a1efc6d&is=6a1daaed&hm=fd9dab93d3770a2b6cd4bc31227bd1d0ba0ce09324a0b0b5a0ae058f075b7545&",
+        "socials": {
+          "discord": "1161796693642182717",
+          "rhythia": "234326"
+        },
+        "scores": {
+          "provider": "rhythia",
+          "userId": 234326,
+          "updatedAt": "2026-06-01T15:56:34.059Z",
+          "recent": [
+            {
+              "id": 4025780,
+              "beatmapTitle": "Sasuke Haraguchi Feat. Kasane Teto - Igaku",
+              "beatmapHash": "rom_-_sasuke_haraguchi_feat__kasane_teto_-_igaku",
+              "awardedSp": 136,
+              "misses": 9,
+              "speed": 1,
+              "spin": false,
+              "passed": true,
+              "createdAt": "2026-06-01T11:54:47.204056+00:00"
+            },
+            {
+              "id": 4025762,
+              "beatmapTitle": "Marino ft. Kiki Wera - Crush",
+              "beatmapHash": "boofrz_-_marino_ft__kiki_wera_-_crush",
+              "awardedSp": 102,
+              "misses": 7,
+              "speed": 1.4500000476837158,
+              "spin": false,
+              "passed": true,
+              "createdAt": "2026-06-01T11:52:20.278103+00:00"
+            },
+            {
+              "id": 4025741,
+              "beatmapTitle": "YOASOBI - Monster (Cut Ver.)",
+              "beatmapHash": "boofrz_-_yoasobi_-_monster__cut_ver__",
+              "awardedSp": 0,
+              "misses": 1,
+              "speed": 1,
+              "spin": false,
+              "passed": true,
+              "createdAt": "2026-06-01T11:50:26.847243+00:00"
+            },
+            {
+              "id": 4020241,
+              "beatmapTitle": "JVKE - Golden Hour (Chime Remix)",
+              "beatmapHash": "nate10993_-_jvke_-_golden_hour_(chime_remix)",
+              "awardedSp": 208,
+              "misses": 13,
+              "speed": 1,
+              "spin": false,
+              "passed": true,
+              "createdAt": "2026-06-01T02:44:01.674308+00:00"
+            },
+            {
+              "id": 4020195,
+              "beatmapTitle": "Twilight Force - Valley of the Vale",
+              "beatmapHash": "indis_-_twilight_force_-_valley_of_the_vale",
+              "awardedSp": 204,
+              "misses": 17,
+              "speed": 1,
+              "spin": false,
+              "passed": true,
+              "createdAt": "2026-06-01T02:40:52.035119+00:00"
+            },
+            {
+              "id": 4020024,
+              "beatmapTitle": "Serenity - Lionheart (Cut Ver.)",
+              "beatmapHash": "indis_-_serenity_-_lionheart__cut_ver__",
+              "awardedSp": 218,
+              "misses": 25,
+              "speed": 1,
+              "spin": false,
+              "passed": true,
+              "createdAt": "2026-06-01T02:26:17.367184+00:00"
+            },
+            {
+              "id": 4017313,
+              "beatmapTitle": "Marina and the Diamonds - How to Be a Heartbreaker (Nightcore & Cut Ver.)",
+              "beatmapHash": "sympho_-_marina_and_the_diamonds_-_how_to_be_a_heartbreaker__nightcore___cut_ver__",
+              "awardedSp": 94,
+              "misses": 0,
+              "speed": 1.4500000476837158,
+              "spin": false,
+              "passed": true,
+              "createdAt": "2026-05-31T23:23:15.645325+00:00"
+            },
+            {
+              "id": 4017290,
+              "beatmapTitle": "YOASOBI - Kaibutsu (TV Size)",
+              "beatmapHash": "sympho_-_yoasobi_-_kaibutsu__tv_size_",
+              "awardedSp": 40,
+              "misses": 5,
+              "speed": 1.4500000476837158,
+              "spin": false,
+              "passed": true,
+              "createdAt": "2026-05-31T23:22:21.444677+00:00"
+            },
+            {
+              "id": 4017274,
+              "beatmapTitle": "YOASOBI - Kaibutsu (TV Size)",
+              "beatmapHash": "sympho_-_yoasobi_-_kaibutsu__tv_size_",
+              "awardedSp": 40,
+              "misses": 0,
+              "speed": 1,
+              "spin": false,
+              "passed": true,
+              "createdAt": "2026-05-31T23:21:17.853703+00:00"
+            },
+            {
+              "id": 4017251,
+              "beatmapTitle": "dj TAKA - quaver",
+              "beatmapHash": "sympho_-_dj_taka_-_quaver",
+              "awardedSp": 56,
+              "misses": 2,
+              "speed": 1.149999976158142,
+              "spin": false,
+              "passed": true,
+              "createdAt": "2026-05-31T23:19:38.475754+00:00"
+            }
+          ]
+        }
       }
     ]
   },
