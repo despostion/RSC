@@ -431,6 +431,18 @@
         }
       },
       {
+        "name": "blossom",
+        "displayName": "blossom",
+        "bio": "meow",
+        "badges": [
+          "member"
+        ],
+        "icon": "assets/members/blossompfp.webp",
+        "socials": {
+          "discord": "492506505313255433"
+        }
+      },
+      {
         "name": "mort",
         "displayName": "mort",
         "bio": "OOOOOOOOOH KING JULIANNNNNNNNNNNNNNNNNNNNNN",
@@ -444,279 +456,30 @@
         }
       },
       {
-        "name": "sillyware",
-        "displayName": "sillyware",
-        "bio": "literally the silliest",
-        "badges": [
-          "member"
-        ],
-        "icon": "assets/members/sillywarepfp.png",
-        "music": "assets/songs/sillyware-theme.mp3",
-        "socials": {
-          "discord": "819406749231742976",
-          "roblox": "2652172"
-        }
-      },
-      {
-        "name": "player",
-        "displayName": "vanfi",
-        "bio": "professional egoer",
-        "quote": "if you are then you can be with the hi",
-        "badges": [
-          "member"
-        ],
-        "icon": "https://cdn.discordapp.com/ephemeral-attachments/1511026358845833489/1511028401199255562/bg.png?ex=6a1ef65c&is=6a1da4dc&hm=5260a4d625876d214b020b06b4a12f8a63dc54e6a2a8faecdb33ff70ff9e47cd&",
-        "socials": {
-          "discord": "754091599805546517",
-          "rhythia": "220992"
-        },
-        "scores": {
-          "provider": "rhythia",
-          "userId": 220992,
-          "updatedAt": "2026-06-01T15:28:52.232Z",
-          "recent": [
-            {
-              "id": 4020124,
-              "beatmapTitle": "Marino ft. Kiki Wera - Crush",
-              "beatmapHash": "boofrz_-_marino_ft__kiki_wera_-_crush",
-              "awardedSp": 154,
-              "misses": 0,
-              "speed": 1.4500000476837158,
-              "spin": false,
-              "passed": true,
-              "createdAt": "2026-06-01T02:35:33.912962+00:00"
-            },
-            {
-              "id": 4019973,
-              "beatmapTitle": "IMOJIST - TETO TERRITORY // Eurobeat Remix - Kasane Teto (Cut Ver.)",
-              "beatmapHash": "kawaisez_-_ımojıst_-_teto_terrıtory____eurobeat_remix_-_kasane_teto__cut_ver__",
-              "awardedSp": 0,
-              "misses": 1,
-              "speed": 1,
-              "spin": false,
-              "passed": true,
-              "createdAt": "2026-06-01T02:22:53.480999+00:00"
-            },
-            {
-              "id": 4019924,
-              "beatmapTitle": "Picdo - My Bread was Burnt to a Crisp",
-              "beatmapHash": "realseezz_-_picdo_-_my_bread_was_burnt_to_a_crisp",
-              "awardedSp": 0,
-              "misses": 0,
-              "speed": 1,
-              "spin": false,
-              "passed": true,
-              "createdAt": "2026-06-01T02:19:10.940545+00:00"
-            },
-            {
-              "id": 4019638,
-              "beatmapTitle": "THE ORAL CIGARETTES - ReI (Cut Ver.)",
-              "beatmapHash": "sympho_-_the_oral_cigarettes_-_rei__cut_ver__",
-              "awardedSp": 0,
-              "misses": 1,
-              "speed": 1,
-              "spin": false,
-              "passed": true,
-              "createdAt": "2026-06-01T02:01:51.482708+00:00"
-            },
-            {
-              "id": 4019434,
-              "beatmapTitle": "bbno$ - Pissman",
-              "beatmapHash": "kr vanfi arcw - bbno_ - pissman",
-              "awardedSp": 0,
-              "misses": 45,
-              "speed": 1.25,
-              "spin": false,
-              "passed": true,
-              "createdAt": "2026-06-01T01:47:58.574156+00:00"
-            },
-            {
-              "id": 3951858,
-              "beatmapTitle": "Mrs. GREEN APPLE - Inferno (TV Size)",
-              "beatmapHash": "solitaireprince_-_mrs__green_apple_-_inferno__tv_size_",
-              "awardedSp": 0,
-              "misses": 2,
-              "speed": 1,
-              "spin": false,
-              "passed": true,
-              "createdAt": "2026-05-28T23:55:23.120538+00:00"
-            },
-            {
-              "id": 3951686,
-              "beatmapTitle": "Mrs. GREEN APPLE - Inferno (TV Size)",
-              "beatmapHash": "solitaireprince_-_mrs__green_apple_-_inferno__tv_size_",
-              "awardedSp": 0,
-              "misses": 7,
-              "speed": 1,
-              "spin": false,
-              "passed": true,
-              "createdAt": "2026-05-28T23:45:53.889382+00:00"
-            },
-            {
-              "id": 3951567,
-              "beatmapTitle": "Marino ft. Kiki Wera - Crush",
-              "beatmapHash": "boofrz_-_marino_ft__kiki_wera_-_crush",
-              "awardedSp": 0,
-              "misses": 0,
-              "speed": 1,
-              "spin": false,
-              "passed": true,
-              "createdAt": "2026-05-28T23:39:14.789591+00:00"
-            },
-            {
-              "id": 3943525,
-              "beatmapTitle": "Marina and the Diamonds - How to Be a Heartbreaker (Nightcore & Cut Ver.)",
-              "beatmapHash": "asahinaoleshev_-_marina_and_the_diamonds_-_how_to_be_a_heartbreaker_(nightcore_&_cut_ver.)",
-              "awardedSp": 0,
-              "misses": 0,
-              "speed": 1,
-              "spin": false,
-              "passed": true,
-              "createdAt": "2026-05-28T17:13:48.255543+00:00"
-            },
-            {
-              "id": 3929829,
-              "beatmapTitle": "VINXIS - Sidetracked Day (Short Ver.)",
-              "beatmapHash": "vanfi_-_vinxis_-_sidetracked_day__short_ver__",
-              "awardedSp": 0,
-              "misses": 5,
-              "speed": 1,
-              "spin": false,
-              "passed": true,
-              "createdAt": "2026-05-27T23:54:33.641128+00:00"
-            }
-          ]
-        }
-      },
-      {
         "name": "boofrz",
         "displayName": "boofrz",
-        "bio": "i make maps",
-        "quote": "very tired",
+        "bio": "i like turtles",
         "badges": [
-          "member"
+          "member",
+          "dedicatedrsc"
         ],
         "icon": "assets/members/boofrzpfp.webp",
         "socials": {
           "discord": "1161796693642182717",
-          "rhythia": "234326"
-        },
-        "scores": {
-          "provider": "rhythia",
-          "userId": 234326,
-          "updatedAt": "2026-06-01T15:56:34.059Z",
-          "recent": [
-            {
-              "id": 4025780,
-              "beatmapTitle": "Sasuke Haraguchi Feat. Kasane Teto - Igaku",
-              "beatmapHash": "rom_-_sasuke_haraguchi_feat__kasane_teto_-_igaku",
-              "awardedSp": 136,
-              "misses": 9,
-              "speed": 1,
-              "spin": false,
-              "passed": true,
-              "createdAt": "2026-06-01T11:54:47.204056+00:00"
-            },
-            {
-              "id": 4025762,
-              "beatmapTitle": "Marino ft. Kiki Wera - Crush",
-              "beatmapHash": "boofrz_-_marino_ft__kiki_wera_-_crush",
-              "awardedSp": 102,
-              "misses": 7,
-              "speed": 1.4500000476837158,
-              "spin": false,
-              "passed": true,
-              "createdAt": "2026-06-01T11:52:20.278103+00:00"
-            },
-            {
-              "id": 4025741,
-              "beatmapTitle": "YOASOBI - Monster (Cut Ver.)",
-              "beatmapHash": "boofrz_-_yoasobi_-_monster__cut_ver__",
-              "awardedSp": 0,
-              "misses": 1,
-              "speed": 1,
-              "spin": false,
-              "passed": true,
-              "createdAt": "2026-06-01T11:50:26.847243+00:00"
-            },
-            {
-              "id": 4020241,
-              "beatmapTitle": "JVKE - Golden Hour (Chime Remix)",
-              "beatmapHash": "nate10993_-_jvke_-_golden_hour_(chime_remix)",
-              "awardedSp": 208,
-              "misses": 13,
-              "speed": 1,
-              "spin": false,
-              "passed": true,
-              "createdAt": "2026-06-01T02:44:01.674308+00:00"
-            },
-            {
-              "id": 4020195,
-              "beatmapTitle": "Twilight Force - Valley of the Vale",
-              "beatmapHash": "indis_-_twilight_force_-_valley_of_the_vale",
-              "awardedSp": 204,
-              "misses": 17,
-              "speed": 1,
-              "spin": false,
-              "passed": true,
-              "createdAt": "2026-06-01T02:40:52.035119+00:00"
-            },
-            {
-              "id": 4020024,
-              "beatmapTitle": "Serenity - Lionheart (Cut Ver.)",
-              "beatmapHash": "indis_-_serenity_-_lionheart__cut_ver__",
-              "awardedSp": 218,
-              "misses": 25,
-              "speed": 1,
-              "spin": false,
-              "passed": true,
-              "createdAt": "2026-06-01T02:26:17.367184+00:00"
-            },
-            {
-              "id": 4017313,
-              "beatmapTitle": "Marina and the Diamonds - How to Be a Heartbreaker (Nightcore & Cut Ver.)",
-              "beatmapHash": "sympho_-_marina_and_the_diamonds_-_how_to_be_a_heartbreaker__nightcore___cut_ver__",
-              "awardedSp": 94,
-              "misses": 0,
-              "speed": 1.4500000476837158,
-              "spin": false,
-              "passed": true,
-              "createdAt": "2026-05-31T23:23:15.645325+00:00"
-            },
-            {
-              "id": 4017290,
-              "beatmapTitle": "YOASOBI - Kaibutsu (TV Size)",
-              "beatmapHash": "sympho_-_yoasobi_-_kaibutsu__tv_size_",
-              "awardedSp": 40,
-              "misses": 5,
-              "speed": 1.4500000476837158,
-              "spin": false,
-              "passed": true,
-              "createdAt": "2026-05-31T23:22:21.444677+00:00"
-            },
-            {
-              "id": 4017274,
-              "beatmapTitle": "YOASOBI - Kaibutsu (TV Size)",
-              "beatmapHash": "sympho_-_yoasobi_-_kaibutsu__tv_size_",
-              "awardedSp": 40,
-              "misses": 0,
-              "speed": 1,
-              "spin": false,
-              "passed": true,
-              "createdAt": "2026-05-31T23:21:17.853703+00:00"
-            },
-            {
-              "id": 4017251,
-              "beatmapTitle": "dj TAKA - quaver",
-              "beatmapHash": "sympho_-_dj_taka_-_quaver",
-              "awardedSp": 56,
-              "misses": 2,
-              "speed": 1.149999976158142,
-              "spin": false,
-              "passed": true,
-              "createdAt": "2026-05-31T23:19:38.475754+00:00"
-            }
-          ]
+          "youtube": "boofrz"
+        }
+      },
+      {
+        "name": "andrew",
+        "displayName": "andrew",
+        "bio": "pookies fantasy football team is gonna win",
+        "badges": [
+          "member"
+        ],
+        "icon": "assets/members/andrewpfp.webp",
+        "socials": {
+          "discord": "1059429112093093992",
+          "roblox": "225212898"
         }
       }
     ]
