@@ -90,8 +90,9 @@
       {
         "name": "shorned",
         "displayName": "shorned",
-        "bio": "shorned",
+        "bio": "im in love with evan fong",
         "badges": [
+          "developer",
           "dedicatedrsc",
           "member"
         ],
@@ -456,6 +457,20 @@
         }
       },
       {
+        "name": "sillyware",
+        "displayName": "sillyware",
+        "bio": "literally the silliest",
+        "badges": [
+          "member",
+          "dedicatedrsc"
+        ],
+        "icon": "assets/members/sillywarepfp.webp",
+        "socials": {
+          "discord": "819406749231742976",
+          "roblox": "2652172"
+        }
+      },
+      {
         "name": "boofrz",
         "displayName": "boofrz",
         "bio": "i like turtles",
@@ -472,14 +487,29 @@
       {
         "name": "andrew",
         "displayName": "andrew",
-        "bio": "pookies fantasy football team is gonna win",
+        "bio": "i like turtles",
         "badges": [
           "member"
         ],
         "icon": "assets/members/andrewpfp.webp",
+        "music": "assets/songs/andrew-theme.mp3",
         "socials": {
           "discord": "1059429112093093992",
-          "roblox": "225212898"
+          "roblox": "225212898",
+          "tiktok": "ar11____"
+        }
+      },
+      {
+        "name": "chyrsocolla",
+        "displayName": "chyrsocolla",
+        "bio": "no life chud that plays rust",
+        "badges": [
+          "member"
+        ],
+        "icon": "assets/members/chyrsocollapfp.webp",
+        "music": "assets/songs/chyrsocolla-theme.mp3",
+        "socials": {
+          "discord": "538173815289806853"
         }
       }
     ]
